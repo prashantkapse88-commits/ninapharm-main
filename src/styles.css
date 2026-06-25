@@ -1,0 +1,161 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-midnight: var(--midnight);
+  --color-deep: var(--deep);
+  --color-cyan-bio: var(--cyan-bio);
+  --color-bio-green: var(--bio-green);
+  --color-gold: var(--gold);
+  --color-ink: var(--ink);
+
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* Brand palette (dark-first futuristic biotech) */
+  --midnight: oklch(0.18 0.06 260);    /* #06142E deep midnight */
+  --deep: oklch(0.12 0.05 265);        /* #050816 darkest */
+  --cyan-bio: oklch(0.82 0.16 215);    /* #00D4FF electric cyan */
+  --bio-green: oklch(0.78 0.18 160);   /* #00D084 bio green */
+  --gold: oklch(0.78 0.13 85);         /* #D4AF37 gold */
+  --ink: oklch(0.18 0.04 260);
+
+  --background: var(--deep);
+  --foreground: oklch(0.97 0.01 240);
+  --card: oklch(0.20 0.06 262);
+  --card-foreground: oklch(0.97 0.01 240);
+  --popover: oklch(0.20 0.06 262);
+  --popover-foreground: oklch(0.97 0.01 240);
+  --primary: var(--cyan-bio);
+  --primary-foreground: var(--deep);
+  --secondary: oklch(0.25 0.06 262);
+  --secondary-foreground: oklch(0.97 0.01 240);
+  --muted: oklch(0.22 0.04 262);
+  --muted-foreground: oklch(0.68 0.03 240);
+  --accent: var(--bio-green);
+  --accent-foreground: var(--deep);
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: var(--cyan-bio);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% -10%, oklch(0.30 0.12 230 / 0.35), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 30%, oklch(0.35 0.14 160 / 0.18), transparent 60%);
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility glass {
+  background: linear-gradient(135deg, oklch(1 0 0 / 0.04), oklch(1 0 0 / 0.01));
+  backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid oklch(1 0 0 / 0.08);
+}
+
+@utility text-gradient-bio {
+  background-image: linear-gradient(120deg, var(--color-cyan-bio) 0%, oklch(0.92 0.08 200) 40%, var(--color-bio-green) 100%);
+  background-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+@utility text-gradient-gold {
+  background-image: linear-gradient(120deg, var(--color-gold), oklch(0.92 0.10 90));
+  background-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+@utility glow-cyan {
+  box-shadow: 0 0 0 1px oklch(0.82 0.16 215 / 0.3), 0 10px 60px -10px oklch(0.82 0.16 215 / 0.45);
+}
+
+@utility hairline {
+  border: 1px solid oklch(1 0 0 / 0.08);
+}
+
+@utility grid-bg {
+  background-image:
+    linear-gradient(oklch(1 0 0 / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(1 0 0 / 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+@utility animate-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+@utility animate-spin-slow {
+  animation: spin-slow 30s linear infinite;
+}
